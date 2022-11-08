@@ -16,7 +16,7 @@ class CreateHotelsTable extends Migration
     {
         Schema::create('hotels', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('country_code');
             $table->foreignIdFor(City::class);
             $table->unsignedInteger('price');

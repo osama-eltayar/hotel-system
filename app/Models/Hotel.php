@@ -32,7 +32,15 @@ class Hotel extends Model
 
 
     //########################################### Relations ################################################
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 
+    public function rooms()
+    {
+        return $this->hasMany(Room::class);
+    }
 
 }
 
