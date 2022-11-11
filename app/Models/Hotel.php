@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Traits\HasFilters;
+use App\Traits\HasSorts;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 /**
@@ -10,6 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
     use HasFactory;
+    use HasFilters;
+    use HasSorts {
+        HasSorts::getModelClassName insteadof HasFilters;
+    }
+
 
     /**
     * The attributes that are mass assignable.
