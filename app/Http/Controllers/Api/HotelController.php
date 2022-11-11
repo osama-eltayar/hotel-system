@@ -7,6 +7,9 @@ use App\Http\Requests\HotelRequest;
 use App\Http\Resources\HotelResource;
 use App\Http\Resources\SuccessResource;
 use App\Models\Hotel;
+use App\Services\Hotels\DeleteHotelService;
+use App\Services\Hotels\StoreHotelService;
+use App\Services\Hotels\UpdateHotelService;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -30,9 +33,9 @@ class HotelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(HotelRequest $request)
+    public function store(HotelRequest $request,StoreHotelService $hotelService)
     {
-        $hotel = Hotel::create($request->validated());
+        $hotel = $hotelService->execute($request->validated());
         return new SuccessResource(new HotelResource($hotel));
 
     }
@@ -45,7 +48,7 @@ class HotelController extends Controller
      */
     public function show(Hotel $hotel)
     {
-        return new SuccessResource(new HotelResource($hotel));
+        return new SuccessResource(new HotelResource($hotel->load('rooms')));
     }
 
     /**
@@ -54,9 +57,9 @@ class HotelController extends Controller
      * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function update(HotelRequest $request, Hotel $hotel)
+    public function update(HotelRequest $request, Hotel $hotel, UpdateHotelService $hotelService)
     {
-        $hotel->update($request->validated());
+        $hotel = $hotelService->execute($request->validated(),$hotel);
         return new SuccessResource(new HotelResource($hotel));
     }
 
@@ -66,9 +69,9 @@ class HotelController extends Controller
      * @param  \App\Models\Hotel  $hotel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Hotel $hotel)
+    public function destroy(Hotel $hotel, DeleteHotelService $hotelService)
     {
-        $hotel->delete();
+        $hotelService->execute($hotel);
         return new SuccessResource([],__('deleted succesful'));
     }
 }

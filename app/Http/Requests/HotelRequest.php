@@ -26,6 +26,9 @@ class HotelRequest extends FormRequest
             'city_id'      => ['required', 'exists:cities,id'],
             'country_code' => ['required', 'string', 'between:2,5'],
             'price'        => ['required', 'integer', 'between:10,1000'],
+            'rooms'        => ['nullable', 'array'],
+            'rooms.*'      => ['required', 'array'],
+            'rooms.*.number' => ['required', 'string', 'between:2,6']
         ];
     }
 }
