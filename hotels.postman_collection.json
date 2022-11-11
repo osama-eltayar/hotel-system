@@ -77,7 +77,7 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "test2@test.com",
+									"value": "user@user.com",
 									"type": "text"
 								},
 								{
