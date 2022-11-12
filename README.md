@@ -26,4 +26,6 @@
 ** by default you have user seeded to database email : user@user.com , password : password
 
 to run test cases you can
-5. in terminal  `$ ./vendor/bin/sail artisan test`
+ in terminal  `$ ./vendor/bin/sail artisan test`
+
+you can use the postman collection in the repo 
